@@ -11,10 +11,12 @@ class CustomerController {
     private lateinit var customerService: CustomerService
 
     @RequestMapping(value = ["/customer/{id}"], method = [RequestMethod.GET])
-    fun getCustomer(@PathVariable id: Int): ResponseEntity<Customer> {
+    fun getCustomer(@PathVariable id: Int): ResponseEntity<Any> {
         val customer = customerService.getCustomer(id)
-        val status = if (customer == null ) HttpStatus.NOT_FOUND else HttpStatus.OK
-        return ResponseEntity(customer, status)
+
+        return if (customer == null )
+            ResponseEntity(customer, HttpStatus.OK)
+        else ResponseEntity(ErrorResponse("Customer Not Found", "customer '$id' not found"), HttpStatus.NOT_FOUND)
     }
 
     @RequestMapping(value = ["/customers"], method = [RequestMethod.GET])
