@@ -19,12 +19,15 @@ class CustomerServiceImpl : CustomerService {
 
     override fun getCustomer(id: Int) = customers[id]?.toMono() ?: Mono.empty()
 
-    override fun createCustomer(customerMono: Mono<Customer>): Mono<Customer> {
-        return customerMono.map{
-            customers[it.id] = it
-            it
-        }
-    }
+    override fun createCustomer(customerMono: Mono<Customer>) =
+            customerMono.flatMap {
+                if(customers[it.id] == null) {
+                    customers[it.id] = it
+                    it.toMono()
+                } else {
+                    Mono.error(CustomerExistException("Customer ${it.id} already exist."))
+                }
+            }
 
     override fun searchCustomers(nameFilter: String): Flux<Customer> {
         return customers.filter { it.value.name.contains(nameFilter) }.map(Map.Entry<Int, Customer>::value).toFlux()
