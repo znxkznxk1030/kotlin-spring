@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Mono
 
 @RestController
 class CustomerController {
@@ -11,12 +12,9 @@ class CustomerController {
     private lateinit var customerService: CustomerService
 
     @RequestMapping(value = ["/customer/{id}"], method = [RequestMethod.GET])
-    fun getCustomer(@PathVariable id: Int): ResponseEntity<Any> {
+    fun getCustomer(@PathVariable id: Int): ResponseEntity<Mono<Customer>> {
         val customer = customerService.getCustomer(id)
-
-        return if (customer == null )
-            ResponseEntity(customer, HttpStatus.OK)
-        else ResponseEntity(ErrorResponse("Customer Not Found", "customer '$id' not found"), HttpStatus.NOT_FOUND)
+        return ResponseEntity(customer, HttpStatus.OK)
     }
 
     @RequestMapping(value = ["/customers"], method = [RequestMethod.GET])
@@ -25,9 +23,8 @@ class CustomerController {
 
 
     @RequestMapping(value = ["/customer"], method = [RequestMethod.POST])
-    fun createCustomer(@RequestBody customer: Customer): ResponseEntity<Unit> {
-        customerService.createCustomer(customer)
-        return ResponseEntity(HttpStatus.CREATED)
+    fun createCustomer(@RequestBody customerMono: Mono<Customer>): ResponseEntity<Mono<*>> {
+        return ResponseEntity(customerService.createCustomer(customerMono), HttpStatus.CREATED)
     }
 
     @RequestMapping(value = ["/customer/{id}"], method = [RequestMethod.DELETE])
