@@ -1,4 +1,4 @@
-package com.microservices.chapter4
+package com.microservices.chapter4.vo
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonInclude.Include

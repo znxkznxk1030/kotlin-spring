@@ -1,5 +1,8 @@
-package com.microservices.chapter4
+package com.microservices.chapter4.service
 
+import com.microservices.chapter4.exception.CustomerExistException
+import com.microservices.chapter4.vo.Customer
+import com.microservices.chapter4.vo.Telephone
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

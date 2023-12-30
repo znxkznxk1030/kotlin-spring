@@ -1,5 +1,7 @@
-package com.microservices.chapter4
+package com.microservices.chapter4.router
 
+import com.microservices.chapter4.handler.CustomerHandler
+import com.microservices.chapter4.vo.Customer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.server.RouterFunction

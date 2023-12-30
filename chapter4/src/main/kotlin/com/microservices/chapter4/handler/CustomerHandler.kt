@@ -1,5 +1,8 @@
-package com.microservices.chapter4
+package com.microservices.chapter4.handler
 
+import com.microservices.chapter4.vo.ErrorResponse
+import com.microservices.chapter4.service.CustomerService
+import com.microservices.chapter4.vo.Customer
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.*
