@@ -19,12 +19,12 @@ class CustomerHandler(private val customerService: CustomerService) {
                     .flatMap { ok().body(it.toMono()) }
                     .switchIfEmpty(notFound().build())
 
-    fun search(serverRequest: ServerRequest) =
-            ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter").orElse("")), Customer::class.java)
-
-    fun create(serverRequest: ServerRequest) = customerService.createCustomer(serverRequest.bodyToMono()).flatMap {
-        created(URI.create("/functional/customer/${it.id}")).build()
-    }.onErrorResume(Exception::class) {
-        badRequest().body(ErrorResponse("error creating customer", it.message ?: "error").toMono())
-    }
+//    fun search(serverRequest: ServerRequest) =
+//            ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter").orElse("")), Customer::class.java)
+//
+//    fun create(serverRequest: ServerRequest) = customerService.createCustomer(serverRequest.bodyToMono()).flatMap {
+//        created(URI.create("/functional/customer/${it.id}")).build()
+//    }.onErrorResume(Exception::class) {
+//        badRequest().body(ErrorResponse("error creating customer", it.message ?: "error").toMono())
+//    }
 }
