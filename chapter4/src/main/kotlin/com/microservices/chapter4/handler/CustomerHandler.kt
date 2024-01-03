@@ -1,8 +1,7 @@
 package com.microservices.chapter4.handler
 
-import com.microservices.chapter4.vo.ErrorResponse
 import com.microservices.chapter4.service.CustomerService
-import com.microservices.chapter4.vo.Customer
+import com.microservices.chapter4.vo.ErrorResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.*
@@ -19,12 +18,15 @@ class CustomerHandler(private val customerService: CustomerService) {
                     .flatMap { ok().body(it.toMono()) }
                     .switchIfEmpty(notFound().build())
 
-//    fun search(serverRequest: ServerRequest) =
+    //    fun search(serverRequest: ServerRequest) =
 //            ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter").orElse("")), Customer::class.java)
 //
-//    fun create(serverRequest: ServerRequest) = customerService.createCustomer(serverRequest.bodyToMono()).flatMap {
-//        created(URI.create("/functional/customer/${it.id}")).build()
-//    }.onErrorResume(Exception::class) {
-//        badRequest().body(ErrorResponse("error creating customer", it.message ?: "error").toMono())
-//    }
+    fun create(serverRequest: ServerRequest) = customerService
+            .createCustomer(serverRequest.bodyToMono())
+            .flatMap {
+                created(URI.create("/customer/${it.id}")).build()
+            }.onErrorResume(Exception::class) {
+                badRequest().body(ErrorResponse("error creating customer", it.message
+                        ?: "error").toMono())
+            }
 }

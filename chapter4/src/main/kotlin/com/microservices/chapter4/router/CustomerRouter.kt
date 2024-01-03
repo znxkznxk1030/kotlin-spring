@@ -13,6 +13,7 @@ class CustomerRouter(private val customerHandler: CustomerHandler) {
     fun customerRoutes(): RouterFunction<*> = router {
         "/customer".nest {
             GET("/{id}", customerHandler::get)
+            POST("", customerHandler::create)
         }
     }
 }
