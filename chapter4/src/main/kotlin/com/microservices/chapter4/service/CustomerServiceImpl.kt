@@ -24,8 +24,6 @@ class CustomerServiceImpl : CustomerService {
     }
 
     override fun createCustomer(customerMono: Mono<Customer>) = customerRepository.create(customerMono)
-//
-//    override fun searchCustomers(nameFilter: String): Flux<Customer> {
-//        return customers.filter { it.value.name.contains(nameFilter) }.map(Map.Entry<Int, Customer>::value).toFlux()
-//    }
+    override fun deleteCustomer(id: Int) = customerRepository.delete(id).map{ it.deletedCount > 0 }
+
 }
