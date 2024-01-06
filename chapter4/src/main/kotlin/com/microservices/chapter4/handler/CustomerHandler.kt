@@ -1,6 +1,7 @@
 package com.microservices.chapter4.handler
 
 import com.microservices.chapter4.service.CustomerService
+import com.microservices.chapter4.vo.Customer
 import com.microservices.chapter4.vo.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -40,4 +41,9 @@ class CustomerHandler(private val customerService: CustomerService) {
                         if (it) ok().build()
                         else status(HttpStatus.NOT_FOUND).build()
                     }
+
+    fun search(serverRequest: ServerRequest) =
+            ok().body(customerService
+                    .searchCustomer(serverRequest.queryParam("nameFilter").orElse("")), Customer::class.java)
+
 }
