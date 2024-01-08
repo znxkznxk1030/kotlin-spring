@@ -1,0 +1,7 @@
+encrypt.key: "this-is-a-secret"
+spring:
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: false
