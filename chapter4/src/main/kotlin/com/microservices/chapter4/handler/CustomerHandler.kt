@@ -21,9 +21,6 @@ class CustomerHandler(private val customerService: CustomerService) {
                     .flatMap { ok().body(it.toMono()) }
                     .switchIfEmpty(notFound().build())
 
-    //    fun search(serverRequest: ServerRequest) =
-//            ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter").orElse("")), Customer::class.java)
-//
     fun create(serverRequest: ServerRequest) =
             customerService
                     .createCustomer(serverRequest.bodyToMono())
