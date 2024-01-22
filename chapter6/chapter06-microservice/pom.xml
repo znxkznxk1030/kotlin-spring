@@ -11,7 +11,7 @@
 	<groupId>com.microservice</groupId>
 	<artifactId>chapter06-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>chapter06-microservice</name>
+	<name>greeting-server</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
