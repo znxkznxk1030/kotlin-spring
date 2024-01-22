@@ -1,5 +1,5 @@
 spring:
   application:
-    name: greeting-server
+    name: greeting
   config:
     import: "optional:configserver:"

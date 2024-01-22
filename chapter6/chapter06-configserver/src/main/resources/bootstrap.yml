@@ -5,3 +5,6 @@ spring:
       server:
         encrypt:
           enabled: false
+        git:
+          uri: https://github.com/znxkznxk1030/kotlin-spring
+          clone-on-start: true

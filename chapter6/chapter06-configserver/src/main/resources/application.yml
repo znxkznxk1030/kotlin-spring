@@ -1,12 +1,2 @@
 server:
   port: 8888
-spring:
-  profiles:
-    active: native
-  cloud:
-    config:
-      server:
-        encrypt:
-          enabled: false
-        git:
-          uri: https://github.com/znxkznxk1030/kotlin-spring
