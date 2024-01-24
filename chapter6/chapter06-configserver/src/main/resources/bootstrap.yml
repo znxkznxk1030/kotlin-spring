@@ -8,3 +8,5 @@ spring:
         git:
           uri: https://github.com/znxkznxk1030/kotlin-spring
           clone-on-start: true
+          repos:
+            simple: https://github.com/znxkznxk1030/kotlin-spring
