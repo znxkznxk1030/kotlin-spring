@@ -3,3 +3,7 @@ spring:
     name: simple
   config:
     import: "optional:configserver:"
+eureka:
+  client:
+    healthcheck:
+      enabled: true
