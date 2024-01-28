@@ -1,9 +1,11 @@
 spring:
   application:
-    name: simple
+    name: greeting
   config:
     import: "optional:configserver:"
 eureka:
   client:
     healthcheck:
       enabled: true
+server:
+  port: 0
