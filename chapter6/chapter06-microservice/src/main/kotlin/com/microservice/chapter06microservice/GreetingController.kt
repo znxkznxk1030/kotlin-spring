@@ -9,6 +9,9 @@ class GreetingController {
     @Value("\${microservice.example.greetings}")
     private lateinit var greetings: String
 
-    @GetMapping("/greetings")
+    @GetMapping("/hello")
     fun greetings() = greetings
+
+    @GetMapping("/hi")
+    fun greeting() = greetings
 }

@@ -1,3 +1,7 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /greeting
 spring:
   application:
     name: greeting
@@ -7,5 +11,3 @@ eureka:
   client:
     healthcheck:
       enabled: true
-server:
-  port: 0
